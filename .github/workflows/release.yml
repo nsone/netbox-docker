@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Builds new NetBox Docker Images
     env:
+      SKIP_STARTUP_SCRIPTS: true
       GH_ACTION: enable
       IMAGE_NAMES: 727502078855.dkr.ecr.us-east-1.amazonaws.com/netbox_docker
     steps:
