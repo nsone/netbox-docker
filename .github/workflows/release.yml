@@ -31,6 +31,12 @@ jobs:
       - id: source-checkout
         name: Checkout
         uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1.6.1
+        with:
+          role-to-assume: arn:aws:iam::727502078855:role/GithubActionsOIDCNetboxDocker
+          role-session-name: githubrolesession
+          aws-region: us-east-1
       - id: set-netbox-docker-version
         name: Get Version of NetBox Docker
         run: echo "::set-output name=version::$(cat VERSION)"
