@@ -81,6 +81,8 @@ trap test_cleanup EXIT ERR
 test_setup
 
 test_netbox_unit_tests
+if [ "${SKIP_STARTUP_SCRIPTS}" != "true" ]; then
 test_initializers
+fi
 
 echo "🐳🐳🐳 Done testing '${IMAGE}'"
