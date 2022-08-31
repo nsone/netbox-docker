@@ -156,3 +156,7 @@ IMAGE=netboxcommunity/netbox:latest ./test.sh
 
 This repository is currently maintained by the community.
 Please consider sponsoring the maintainers of this project.
+
+## Login  
+
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 727502078855.dkr.ecr.us-east-1.amazonaws.com
