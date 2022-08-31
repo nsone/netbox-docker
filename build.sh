@@ -213,6 +213,8 @@ if [ -d "${NETBOX_PATH}/.git" ] && [ -z "${SKIP_GIT}" ]; then
   )
 fi
 
+sed -i 's/tzdata==2022.1/tzdata==2022.2/' "${NETBOX_PATH}/requirements.txt"
+
 ###
 # Variables for tagging the docker image
 ###
