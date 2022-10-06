@@ -194,8 +194,7 @@ EXEMPT_VIEW_PERMISSIONS = _environ_get_and_map('EXEMPT_VIEW_PERMISSIONS', '', _A
 INTERNAL_IPS = _environ_get_and_map('INTERNAL_IPS', '127.0.0.1 ::1', _AS_LIST)
 
 # Enable GraphQL API.
-if 'GRAPHQL_ENABLED' in environ:
-    GRAPHQL_ENABLED = _environ_get_and_map('GRAPHQL_ENABLED', None, _AS_BOOL)
+GRAPHQL_ENABLED = _environ_get_and_map('GRAPHQL_ENABLED', 'True', _AS_BOOL)
 
 # # Enable custom logging. Please see the Django documentation for detailed guidance on configuring custom logs:
 # #   https://docs.djangoproject.com/en/stable/topics/logging/
@@ -306,6 +305,17 @@ RQ_DEFAULT_TIMEOUT = _environ_get_and_map('RQ_DEFAULT_TIMEOUT', 300, _AS_INT)
 # The file path where custom scripts will be stored. A trailing slash is not needed. Note that the default value of
 # this setting is derived from the installed location.
 SCRIPTS_ROOT = environ.get('SCRIPTS_ROOT', '/opt/netbox/scripts')
+
+# The name to use for the csrf token cookie.
+CSRF_COOKIE_NAME = environ.get('CSRF_COOKIE_NAME', 'csrftoken')
+
+# Cross-Site-Request-Forgery-Attack settings. If Netbox is sitting behind a reverse proxy, you might need to set the CSRF_TRUSTED_ORIGINS flag.
+# Django 4.0 requires to specify the URL Scheme in this setting. An example environment variable could be specified like:
+# CSRF_TRUSTED_ORIGINS=https://demo.netbox.dev http://demo.netbox.dev
+CSRF_TRUSTED_ORIGINS = _environ_get_and_map('CSRF_TRUSTED_ORIGINS', '', _AS_LIST)
+
+# The name to use for the session cookie.
+SESSION_COOKIE_NAME = environ.get('SESSION_COOKIE_NAME', 'sessionid')
 
 # The name to use for the csrf token cookie.
 CSRF_COOKIE_NAME = environ.get('CSRF_COOKIE_NAME', 'csrftoken')
