@@ -232,7 +232,7 @@ if 'MAX_PAGE_SIZE' in environ:
 MEDIA_ROOT = environ.get('MEDIA_ROOT', join(_BASE_DIR, 'media'))
 
 # Expose Prometheus monitoring metrics at the HTTP endpoint '/metrics'
-METRICS_ENABLED = _environ_get_and_map('METRICS_ENABLED', 'False', _AS_BOOL)
+METRICS_ENABLED = _environ_get_and_map('METRICS_ENABLED', 'True', _AS_BOOL)
 
 # Credentials that NetBox will uses to authenticate to devices when connecting via NAPALM.
 if 'NAPALM_USERNAME' in environ:
@@ -336,11 +336,11 @@ DATETIME_FORMAT = environ.get('DATETIME_FORMAT', 'N j, Y g:i a')
 SHORT_DATETIME_FORMAT = environ.get('SHORT_DATETIME_FORMAT', 'Y-m-d H:i')
 
 # Base level security
-SESSION_COOKIE_SECURE = environ.get('SESSION_COOKIE_SECURE', 'True').lower() == 'true'
-CSRF_COOKIE_SECURE = environ.get('CSRF_COOKIE_SECURE', 'True').lower() == 'true'
-SECURE_HSTS_PRELOAD = environ.get('SECURE_HSTS_PRELOAD', 'True').lower() == 'true'
-SECURE_HSTS_INCLUDE_SUBDOMAINS = environ.get('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'True').lower() == 'true'
-SECURE_HSTS_SECONDS = environ.get('SECURE_HSTS_SECONDS', '31536000')
+SESSION_COOKIE_SECURE = _environ_get_and_map('SESSION_COOKIE_SECURE', 'True', _AS_BOOL)
+CSRF_COOKIE_SECURE = _environ_get_and_map('CSRF_COOKIE_SECURE', 'True', _AS_BOOL)
+SECURE_HSTS_PRELOAD = _environ_get_and_map('SECURE_HSTS_PRELOAD', 'True', _AS_BOOL)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = _environ_get_and_map('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'True', _AS_BOOL)
+SECURE_HSTS_SECONDS = _environ_get_and_map('SECURE_HSTS_SECONDS', '31536000', _AS_INT)
 
 # Social Auth Okta
 SOCIAL_AUTH_OKTA_OPENIDCONNECT_API_URL = environ.get('SOCIAL_AUTH_OKTA_OPENIDCONNECT_API_URL', None)
@@ -348,7 +348,7 @@ SOCIAL_AUTH_OKTA_OPENIDCONNECT_KEY= environ.get('SOCIAL_AUTH_OKTA_OPENIDCONNECT_
 SOCIAL_AUTH_OKTA_OPENIDCONNECT_SECRET= environ.get('SOCIAL_AUTH_OKTA_OPENIDCONNECT_SECRET', None)
 
 # Social Auth Azure AD Tenant
-SOCIAL_AUTH_REDIRECT_IS_HTTPS = environ.get('SOCIAL_AUTH_REDIRECT_IS_HTTPS', 'True').lower() == 'true'
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = _environ_get_and_map('SOCIAL_AUTH_REDIRECT_IS_HTTPS', 'True',_AS_BOOL)
 SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_KEY = environ.get('SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_KEY', None)
 SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_RESOURCE = environ.get('SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_RESOURCE', None)
 SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_SECRET = environ.get('SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_SECRET', None)
