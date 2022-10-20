@@ -44,11 +44,15 @@ RUN export DEBIAN_FRONTEND=noninteractive \
       bzip2 \
       ca-certificates \
       curl \
+      gcc \
       libldap-common \
       libpq5 \
+      libxmlsec1-dev \
       openssl \
+      pkg-config \
       python3 \
       python3-distutils \
+      python3-dev \
       tini \
     && curl -sL https://nginx.org/keys/nginx_signing.key \
       > /etc/apt/trusted.gpg.d/nginx.asc && \
@@ -84,6 +88,12 @@ RUN mkdir -p static /opt/unit/state/ /opt/unit/tmp/ \
       && cd /opt/netbox/ && SECRET_KEY="dummy" /opt/netbox/venv/bin/python -m mkdocs build \
           --config-file /opt/netbox/mkdocs.yml --site-dir /opt/netbox/netbox/project-static/docs/ \
       && SECRET_KEY="dummy" /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input
+
+RUN mkdir /opt/netbox-cloud-plugin/ \
+    && cd /opt/netbox-cloud-plugin/ \
+    && curl "https://netbox-cloud-plugin.s3.amazonaws.com/aws_cli/awscli-exe-linux-x86_64.tar.gz" -o "awscliv2.tar.gz" \
+    && tar xfz awscliv2.tar.gz \
+    && ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
 
 ENV LANG=C.UTF-8 PATH=/opt/netbox/venv/bin:$PATH
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
