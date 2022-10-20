@@ -183,7 +183,7 @@ MAX_PAGE_SIZE = int(environ.get('MAX_PAGE_SIZE', 1000))
 MEDIA_ROOT = environ.get('MEDIA_ROOT', join(_BASE_DIR, 'media'))
 
 # Expose Prometheus monitoring metrics at the HTTP endpoint '/metrics'
-METRICS_ENABLED = environ.get('METRICS_ENABLED', 'False').lower() == 'true'
+METRICS_ENABLED = environ.get('METRICS_ENABLED', 'True').lower() == 'true'
 
 # Credentials that NetBox will uses to authenticate to devices when connecting via NAPALM.
 NAPALM_USERNAME = environ.get('NAPALM_USERNAME', '')
@@ -254,3 +254,26 @@ TIME_FORMAT = environ.get('TIME_FORMAT', 'g:i a')
 SHORT_TIME_FORMAT = environ.get('SHORT_TIME_FORMAT', 'H:i:s')
 DATETIME_FORMAT = environ.get('DATETIME_FORMAT', 'N j, Y g:i a')
 SHORT_DATETIME_FORMAT = environ.get('SHORT_DATETIME_FORMAT', 'Y-m-d H:i')
+
+# Base level security
+SESSION_COOKIE_SECURE = environ.get('SESSION_COOKIE_SECURE', 'True').lower() == 'true'
+CSRF_COOKIE_SECURE = environ.get('CSRF_COOKIE_SECURE', 'True').lower() == 'true'
+SECURE_HSTS_PRELOAD = environ.get('SECURE_HSTS_PRELOAD', 'True').lower() == 'true'
+SECURE_HSTS_INCLUDE_SUBDOMAINS = environ.get('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'True').lower() == 'true'
+SECURE_HSTS_SECONDS = environ.get('SECURE_HSTS_SECONDS', '31536000')
+
+# Social Auth Okta
+SOCIAL_AUTH_OKTA_OPENIDCONNECT_API_URL = environ.get('SOCIAL_AUTH_OKTA_OPENIDCONNECT_API_URL', None)
+SOCIAL_AUTH_OKTA_OPENIDCONNECT_KEY= environ.get('SOCIAL_AUTH_OKTA_OPENIDCONNECT_KEY', None)
+SOCIAL_AUTH_OKTA_OPENIDCONNECT_SECRET= environ.get('SOCIAL_AUTH_OKTA_OPENIDCONNECT_SECRET', None)
+
+# Social Auth Azure AD Tenant
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = environ.get('SOCIAL_AUTH_REDIRECT_IS_HTTPS', 'True').lower() == 'true'
+SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_KEY = environ.get('SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_KEY', None)
+SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_RESOURCE = environ.get('SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_RESOURCE', None)
+SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_SECRET = environ.get('SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_SECRET', None)
+SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_TENANT_ID = environ.get('SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_TENANT_ID', None)
+
+# Social Auth Azure AD
+SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = environ.get('SOCIAL_AUTH_AZUREAD_OAUTH2_KEY', None)
+SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = environ.get('SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET', None)
