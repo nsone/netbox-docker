@@ -57,7 +57,7 @@ DATABASE = {
 # to use two separate database IDs.
 REDIS = {
     'tasks': {
-        'HOST': environ.get('REDIS_HOST', 'localhost'),
+        'HOST': environ.get('REDIS_HOST', 'redis'),
         'PORT': int(environ.get('REDIS_PORT', 6379)),
         'PASSWORD': _read_secret('redis_password', environ.get('REDIS_PASSWORD', '')),
         'DATABASE': int(environ.get('REDIS_DATABASE', 0)),
@@ -65,7 +65,7 @@ REDIS = {
         'INSECURE_SKIP_TLS_VERIFY': environ.get('REDIS_INSECURE_SKIP_TLS_VERIFY', 'False').lower() == 'true',
     },
     'caching': {
-        'HOST': environ.get('REDIS_CACHE_HOST', environ.get('REDIS_HOST', 'localhost')),
+        'HOST': environ.get('REDIS_CACHE_HOST', environ.get('REDIS_HOST', 'redis')),
         'PORT': int(environ.get('REDIS_CACHE_PORT', environ.get('REDIS_PORT', 6379))),
         'PASSWORD': _read_secret('redis_cache_password', environ.get('REDIS_CACHE_PASSWORD', environ.get('REDIS_PASSWORD', ''))),
         'DATABASE': int(environ.get('REDIS_CACHE_DATABASE', 1)),
@@ -161,7 +161,7 @@ LOGGING = {}
 
 # Setting this to True will permit only authenticated users to access any part of NetBox. By default, anonymous users
 # are permitted to access most data in NetBox (excluding secrets) but not make any changes.
-LOGIN_REQUIRED = environ.get('LOGIN_REQUIRED', 'False').lower() == 'true'
+LOGIN_REQUIRED = environ.get('LOGIN_REQUIRED', 'True').lower() == 'true'
 
 # The length of time (in seconds) for which a user will remain logged into the web UI before being prompted to
 # re-authenticate. (Default: 1209600 [14 days])
@@ -229,14 +229,14 @@ RELEASE_CHECK_URL = environ.get('RELEASE_CHECK_URL', None)
 
 # The file path where custom reports will be stored. A trailing slash is not needed. Note that the default value of
 # this setting is derived from the installed location.
-REPORTS_ROOT = environ.get('REPORTS_ROOT', '/etc/netbox/reports')
+REPORTS_ROOT = environ.get('REPORTS_ROOT', '/opt/netbox/reports')
 
 # Maximum execution time for background tasks, in seconds.
 RQ_DEFAULT_TIMEOUT = int(environ.get('RQ_DEFAULT_TIMEOUT', 300))
 
 # The file path where custom scripts will be stored. A trailing slash is not needed. Note that the default value of
 # this setting is derived from the installed location.
-SCRIPTS_ROOT = environ.get('SCRIPTS_ROOT', '/etc/netbox/scripts')
+SCRIPTS_ROOT = environ.get('SCRIPTS_ROOT', '/opt/netbox/scripts')
 
 # By default, NetBox will store session data in the database. Alternatively, a file path can be specified here to use
 # local file storage instead. (This can be useful for enabling authentication on a standby instance with read-only
@@ -279,7 +279,7 @@ SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = environ.get('SOCIAL_AUTH_AZUREAD_OAUTH2_KEY', N
 SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = environ.get('SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET', None)
 
 # This is needed for Storage Bucket
-STORAGE_BACKEND = environ.get('STORAGE_BACKEND', None)
+STORAGE_BACKEND = environ.get('STORAGE_BACKEND', 'storages.backends.s3boto3.S3Boto3Storage')
 STORAGE_CONFIG  = {
 	'AWS_ACCESS_KEY_ID': environ.get('AWS_S3_ACCESS_KEY_ID', None),
 	'AWS_SECRET_ACCESS_KEY': _read_secret('aws_s3_secret_access_key', environ.get('AWS_S3_SECRET_ACCESS_KEY', None)),
