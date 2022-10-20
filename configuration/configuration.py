@@ -277,3 +277,12 @@ SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_TENANT_ID = environ.get('SOCIAL_AUTH_AZUREAD_T
 # Social Auth Azure AD
 SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = environ.get('SOCIAL_AUTH_AZUREAD_OAUTH2_KEY', None)
 SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = environ.get('SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET', None)
+
+# This is needed for Storage Bucket
+STORAGE_BACKEND = environ.get('STORAGE_BACKEND', None)
+STORAGE_CONFIG  = {
+	'AWS_ACCESS_KEY_ID': environ.get('AWS_S3_ACCESS_KEY_ID', None),
+	'AWS_SECRET_ACCESS_KEY': _read_secret('aws_s3_secret_access_key', environ.get('AWS_S3_SECRET_ACCESS_KEY', None)),
+	'AWS_STORAGE_BUCKET_NAME': environ.get('AWS_STORAGE_BUCKET_NAME', None),
+	'AWS_S3_REGION_NAME': environ.get('AWS_S3_REGION_NAME', None),
+}
