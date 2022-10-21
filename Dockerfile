@@ -9,10 +9,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
       --yes -qq --no-install-recommends \
       build-essential \
       ca-certificates \
+      gcc \
       libldap-dev \
       libpq-dev \
       libsasl2-dev \
       libssl-dev \
+      libxmlsec1-dev \
+      pkg-config \
       python3-dev \
       python3-pip \
       python3-venv \
@@ -44,15 +47,11 @@ RUN export DEBIAN_FRONTEND=noninteractive \
       bzip2 \
       ca-certificates \
       curl \
-      gcc \
       libldap-common \
       libpq5 \
-      libxmlsec1-dev \
       openssl \
-      pkg-config \
       python3 \
       python3-distutils \
-      python3-dev \
       tini \
     && curl -sL https://nginx.org/keys/nginx_signing.key \
       > /etc/apt/trusted.gpg.d/nginx.asc && \
