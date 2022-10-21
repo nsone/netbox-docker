@@ -75,7 +75,7 @@ from users.models import Token
 if not User.objects.filter(username='${SUPERUSER_NAME}'):
     u=User.objects.create_superuser('${SUPERUSER_NAME}', '${SUPERUSER_EMAIL}', '${SUPERUSER_PASSWORD}')
     Token.objects.create(user=u, key='${SUPERUSER_API_TOKEN}')
-else 
+else:
   u = User.objects.get(username='admin')
   u.set_password('${SUPERUSER_PASSWORD}')
   u.save()
