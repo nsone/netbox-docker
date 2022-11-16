@@ -143,6 +143,8 @@ For more details on custom builds [consult our wiki][netbox-docker-wiki-build].
 
 [netbox-docker-wiki-build]: https://github.com/netbox-community/netbox-docker/wiki/Build
 
+`IMAGE_NAMES=727502078855.dkr.ecr.us-east-1.amazonaws.com/netbox_docker ./build.sh vx.y.z --push`
+
 ## Tests
 
 We have a test script.
